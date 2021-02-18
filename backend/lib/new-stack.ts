@@ -58,6 +58,7 @@ export class NewStack extends cdk.Stack {
     });
 
     const todosLambda = new lambda.Function(this, "AppSynctodosHandler", {
+      functionName: "todoFn",
       runtime: lambda.Runtime.NODEJS_12_X,
       handler: "main.handler",
       code: lambda.Code.fromAsset("lambda-fns"),
@@ -80,6 +81,7 @@ export class NewStack extends cdk.Stack {
     });
 
     const todosTable = new ddb.Table(this, "CDKtodosTable", {
+      tableName: "todosTable",
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
       partitionKey: {
         name: "id",
