@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "@aws-cdk/aws-appsync": "^1.74.0",
-    "@aws-cdk/aws-cloudfront": "^1.74.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.74.0",
+    "@aws-cdk/aws-cloudfront": "^1.89.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.89.0",
     "@aws-cdk/aws-dynamodb": "^1.74.0",
     "@aws-cdk/aws-lambda": "^1.74.0",
-    "@aws-cdk/aws-s3": "^1.74.0",
-    "@aws-cdk/aws-s3-deployment": "^1.74.0",
+    "@aws-cdk/aws-s3": "^1.89.0",
+    "@aws-cdk/aws-s3-deployment": "^1.89.0",
     "@aws-cdk/core": "1.73.0",
     "aws-sdk": "^2.793.0",
     "source-map-support": "^0.5.16"
