@@ -11,31 +11,31 @@ export class NewStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // // create a bucket to upload your app files
-    // const websiteBucket = new s3.Bucket(this, "WebsiteBucket", {
-    //   versioned: true,
-    // });
+    // create a bucket to upload your app files
+    const websiteBucket = new s3.Bucket(this, "WebsiteBucket", {
+      versioned: true,
+    });
 
-    // // create a CDN to deploy your website
-    // const distribution = new cloudfront.Distribution(this, "Distribution", {
-    //   defaultBehavior: {
-    //     origin: new origins.S3Origin(websiteBucket),
-    //   },
-    //   defaultRootObject: "index.html",
-    // });
+    // create a CDN to deploy your website
+    const distribution = new cloudfront.Distribution(this, "Distribution", {
+      defaultBehavior: {
+        origin: new origins.S3Origin(websiteBucket),
+      },
+      defaultRootObject: "index.html",
+    });
 
-    // // Prints out the web endpoint to the terminal
-    // new cdk.CfnOutput(this, "DistributionDomainName", {
-    //   value: distribution.domainName,
-    // });
+    // Prints out the web endpoint to the terminal
+    new cdk.CfnOutput(this, "DistributionDomainName", {
+      value: distribution.domainName,
+    });
 
-    // // housekeeping for uploading the data in bucket
-    // new s3deploy.BucketDeployment(this, "DeployWebsite", {
-    //   sources: [s3deploy.Source.asset("../frontend/public")],
-    //   destinationBucket: websiteBucket,
-    //   distribution,
-    //   distributionPaths: ["/*"],
-    // });
+    // housekeeping for uploading the data in bucket
+    new s3deploy.BucketDeployment(this, "DeployWebsite", {
+      sources: [s3deploy.Source.asset("../frontend/public")],
+      destinationBucket: websiteBucket,
+      distribution,
+      distributionPaths: ["/*"],
+    });
 
     const api = new appsync.GraphqlApi(this, "MainTodosApi", {
       name: "MainTodosApi",
@@ -58,6 +58,7 @@ export class NewStack extends cdk.Stack {
     });
 
     const todosLambda = new lambda.Function(this, "AppSynctodosHandler", {
+      functionName: "todoFn",
       runtime: lambda.Runtime.NODEJS_12_X,
       handler: "main.handler",
       code: lambda.Code.fromAsset("lambda-fns"),
@@ -80,6 +81,7 @@ export class NewStack extends cdk.Stack {
     });
 
     const todosTable = new ddb.Table(this, "CDKtodosTable", {
+      tableName: "todosTable",
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
       partitionKey: {
         name: "id",
