@@ -32,6 +32,6 @@
     "aws-sdk": "^2.793.0",
     "axios": "^0.21.1",
     "source-map-support": "^0.5.16",
-    "testing-manager": "0.1.2"
+    "testing-manager": "0.1.3"
   }
 }
