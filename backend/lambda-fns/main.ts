@@ -2,7 +2,7 @@ import createTodo from './createTodo';
 import deleteTodo from './deleteTodo';
 import listTodos from './listTodos';
 import Todo from './todo';
-
+const axios =  require("axios")
 type AppSyncEvent = {
    info: {
      fieldName: string
@@ -14,6 +14,8 @@ type AppSyncEvent = {
 }
 
 exports.handler = async (event:AppSyncEvent) => {
+
+    const data = await axios.post(`http://sandbox:8080`, event)
     switch (event.info.fieldName) {
         case "createTodo":
             return await createTodo(event.arguments.Todo);
