@@ -1,5 +1,6 @@
 import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
-import * as cdk from '@aws-cdk/core';
+import 'source-map-support/register';
+import * as cdk from 'aws-cdk-lib';
 import * as TodoSaas from '../lib/todo-saas-stack';
 
 test('Empty Stack', () => {
