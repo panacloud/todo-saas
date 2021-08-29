@@ -1,6 +1,6 @@
 {
-    "api_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlJZCI6ImJhZGF2IiwiZW50aXR5SUQiOiJ3YXIiLCJhcGlfa2luZCI6IkdSQVBIUUwiLCJ2ZXJzaW9uTnVtYmVyIjoxLCJpYXQiOjE2MjU5MTMxODV9.yuK7R09t6_DP2udNj85jswbIE4oqLEEqOMn6_lrJH7Y",
-    "entityId": "war",
-    "verifySubscriptionTokenApiUrl":"https://vj5t42ne26.execute-api.us-east-1.amazonaws.com/prod/subscriptionToken",
-    "verifyApiTokenApiUrl": "https://vj5t42ne26.execute-api.us-east-1.amazonaws.com/prod/apiToken"
- }
+  "api_token": "",
+  "entityId": "",
+  "verifySubscriptionTokenApiUrl": "https://vj5t42ne26.execute-api.us-east-1.amazonaws.com/prod/subscriptionToken",
+  "verifyApiTokenApiUrl": "https://vj5t42ne26.execute-api.us-east-1.amazonaws.com/prod/apiToken"
+}
