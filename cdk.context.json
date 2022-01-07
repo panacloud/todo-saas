@@ -1,6 +1,0 @@
-{
-  "api_token": "",
-  "entityId": "",
-  "verifySubscriptionTokenApiUrl": "https://vj5t42ne26.execute-api.us-east-1.amazonaws.com/prod/subscriptionToken",
-  "verifyApiTokenApiUrl": "https://vj5t42ne26.execute-api.us-east-1.amazonaws.com/prod/apiToken"
-}

@@ -1,0 +1,18 @@
+{
+  "lambdas": {
+    "getTodos": {
+      "asset_path": "mock_lambda/getTodos/index.ts",
+      "is_mock": true
+    },
+    "addTodo": {
+      "asset_path": "mock_lambda/addTodo/index.ts",
+      "is_mock": true
+    },
+    "deleteTodo": {
+      "asset_path": "mock_lambda/deleteTodo/index.ts",
+      "is_mock": true
+    }
+  },
+  "mockLambdaLayer": { "asset_path": "mock_lambda_layer" },
+  "stages": ["prd", "dev"]
+}
