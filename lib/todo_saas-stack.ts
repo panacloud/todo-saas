@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import { AppsyncConstruct } from "./AppsyncConstruct";
 import { DynamoDBConstruct } from "./DynamoDBConstruct";
 import { AspectController } from "../editable_src/aspects/AspectController";
-import { aws_lambda as lambda } from "aws-cdk-lib";
+import { aws_lambda as lambda, Duration } from "aws-cdk-lib";
 
 interface EnvProps {
   prod?: string;
@@ -13,78 +13,87 @@ export class TodoSaasStack extends Stack {
   constructor(scope: Construct, id: string, props?: EnvProps) {
     super(scope, id);
 
-    const todoApi_table: DynamoDBConstruct = new DynamoDBConstruct(
+    const myApi_table: DynamoDBConstruct = new DynamoDBConstruct(
       this,
-      "todoApiDynamoDBConstruct",
+      "myApiDynamoDBConstruct",
       { prod: props?.prod }
     );
-    const todoApi_lambdaLayer: lambda.LayerVersion = new lambda.LayerVersion(
+    const myApi_lambdaLayer: lambda.LayerVersion = new lambda.LayerVersion(
       this,
-      "todoApiLambdaLayer",
+      "myApiLambdaLayer",
       {
         code: lambda.Code.fromAsset("editable_src/lambdaLayer"),
       }
     );
-    const todoApi_mock_lambdaLayer: lambda.LayerVersion =
-      new lambda.LayerVersion(this, "todoApiMockLambdaLayer", {
+    const myApi_mock_lambdaLayer: lambda.LayerVersion = new lambda.LayerVersion(
+      this,
+      "myApiMockLambdaLayer",
+      {
         code: lambda.Code.fromAsset("mock_lambda_layer"),
-      });
-    const todoApi_lambdaFn_getTodos: lambda.Function = new lambda.Function(
+      }
+    );
+    const myApi_lambdaFn_getTodos: lambda.Function = new lambda.Function(
       this,
-      "todoApiLambdagetTodos",
+      "myApiLambdagetTodos",
       {
         functionName: props?.prod
-          ? props?.prod + "-todoApiLambdagetTodos"
-          : "todoApiLambdagetTodos",
+          ? props?.prod + "-myApiLambdagetTodos"
+          : "myApiLambdagetTodos",
         runtime: lambda.Runtime.NODEJS_12_X,
         handler: "index.handler",
+        memorySize: 128,
+        timeout: Duration.seconds(6),
         code: lambda.Code.fromAsset("mock_lambda/getTodos"),
-        layers: [todoApi_mock_lambdaLayer],
+        layers: [myApi_mock_lambdaLayer],
 
-        environment: { TableName: todoApi_table.table.tableName },
+        environment: { TableName: myApi_table.table.tableName },
       }
     );
-    const todoApi_lambdaFn_addTodo: lambda.Function = new lambda.Function(
+    const myApi_lambdaFn_addTodo: lambda.Function = new lambda.Function(
       this,
-      "todoApiLambdaaddTodo",
+      "myApiLambdaaddTodo",
       {
         functionName: props?.prod
-          ? props?.prod + "-todoApiLambdaaddTodo"
-          : "todoApiLambdaaddTodo",
+          ? props?.prod + "-myApiLambdaaddTodo"
+          : "myApiLambdaaddTodo",
         runtime: lambda.Runtime.NODEJS_12_X,
         handler: "index.handler",
+        memorySize: 128,
+        timeout: Duration.seconds(6),
         code: lambda.Code.fromAsset("mock_lambda/addTodo"),
-        layers: [todoApi_mock_lambdaLayer],
+        layers: [myApi_mock_lambdaLayer],
 
-        environment: { TableName: todoApi_table.table.tableName },
+        environment: { TableName: myApi_table.table.tableName },
       }
     );
-    const todoApi_lambdaFn_deleteTodo: lambda.Function = new lambda.Function(
+    const myApi_lambdaFn_deleteTodo: lambda.Function = new lambda.Function(
       this,
-      "todoApiLambdadeleteTodo",
+      "myApiLambdadeleteTodo",
       {
         functionName: props?.prod
-          ? props?.prod + "-todoApiLambdadeleteTodo"
-          : "todoApiLambdadeleteTodo",
+          ? props?.prod + "-myApiLambdadeleteTodo"
+          : "myApiLambdadeleteTodo",
         runtime: lambda.Runtime.NODEJS_12_X,
         handler: "index.handler",
+        memorySize: 128,
+        timeout: Duration.seconds(6),
         code: lambda.Code.fromAsset("mock_lambda/deleteTodo"),
-        layers: [todoApi_mock_lambdaLayer],
+        layers: [myApi_mock_lambdaLayer],
 
-        environment: { TableName: todoApi_table.table.tableName },
+        environment: { TableName: myApi_table.table.tableName },
       }
     );
-    todoApi_table.table.grantFullAccess(todoApi_lambdaFn_getTodos);
-    todoApi_table.table.grantFullAccess(todoApi_lambdaFn_addTodo);
-    todoApi_table.table.grantFullAccess(todoApi_lambdaFn_deleteTodo);
+    myApi_table.table.grantFullAccess(myApi_lambdaFn_getTodos);
+    myApi_table.table.grantFullAccess(myApi_lambdaFn_addTodo);
+    myApi_table.table.grantFullAccess(myApi_lambdaFn_deleteTodo);
 
-    const todoApi: AppsyncConstruct = new AppsyncConstruct(
+    const myApi: AppsyncConstruct = new AppsyncConstruct(
       this,
-      "todoApiAppsyncConstruct",
+      "myApiAppsyncConstruct",
       {
-        todoApi_lambdaFn_getTodosArn: todoApi_lambdaFn_getTodos.functionArn,
-        todoApi_lambdaFn_addTodoArn: todoApi_lambdaFn_addTodo.functionArn,
-        todoApi_lambdaFn_deleteTodoArn: todoApi_lambdaFn_deleteTodo.functionArn,
+        myApi_lambdaFn_getTodosArn: myApi_lambdaFn_getTodos.functionArn,
+        myApi_lambdaFn_addTodoArn: myApi_lambdaFn_addTodo.functionArn,
+        myApi_lambdaFn_deleteTodoArn: myApi_lambdaFn_deleteTodo.functionArn,
         prod: props?.prod,
       }
     );
