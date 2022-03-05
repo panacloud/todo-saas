@@ -1,11 +1,12 @@
 {
   "saasType": "API",
   "api": {
+    "template": "Generate Multi-Tenant Serverless API Scaffolding from Schema",
     "multitenancy": false,
     "nestedResolver": false,
     "language": "TypeScript",
     "cloudprovider": "AWS",
-    "apiName": "todoApi",
+    "apiName": "myApi",
     "schemaPath": "./editable_src/graphql/schema/schema.graphql",
     "apiType": "GraphQL",
     "database": "DynamoDB (NoSQL)"

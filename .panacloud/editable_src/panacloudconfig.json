@@ -1,18 +1,9 @@
 {
   "lambdas": {
-    "getTodos": {
-      "asset_path": "mock_lambda/getTodos/index.ts",
-      "is_mock": true
-    },
-    "addTodo": {
-      "asset_path": "mock_lambda/addTodo/index.ts",
-      "is_mock": true
-    },
-    "deleteTodo": {
-      "asset_path": "mock_lambda/deleteTodo/index.ts",
-      "is_mock": true
-    }
+    "getTodos": { "is_mock": true, "memory_size": 128, "timeout": 6 },
+    "addTodo": { "is_mock": true, "memory_size": 128, "timeout": 6 },
+    "deleteTodo": { "is_mock": true, "memory_size": 128, "timeout": 6 }
   },
-  "mockLambdaLayer": { "asset_path": "mock_lambda_layer" },
+  "mockData": { "is_custom": false },
   "stages": ["prd", "dev"]
 }

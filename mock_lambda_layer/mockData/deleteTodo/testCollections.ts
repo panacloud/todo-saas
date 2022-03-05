@@ -5,9 +5,9 @@ export const testCollections: TestCollection = {
     deleteTodo: [
       {
         arguments: {
-          todoId: "Cecelia",
+          todoId: "Candide",
         },
-        response: "Merle",
+        response: "Idalina",
       },
     ],
   },

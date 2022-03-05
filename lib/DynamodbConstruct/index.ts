@@ -10,18 +10,14 @@ export class DynamoDBConstruct extends Construct {
   constructor(scope: Construct, id: string, props?: DynamoDBProps) {
     super(scope, id);
 
-    const todoApi_table: dynamodb.Table = new dynamodb.Table(
-      this,
-      "todoApiTable",
-      {
-        tableName: props?.prod ? props?.prod + "_todoApi" : "todoApi",
-        billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-        partitionKey: {
-          name: "id",
-          type: dynamodb.AttributeType.STRING,
-        },
-      }
-    );
-    this.table = todoApi_table;
+    const myApi_table: dynamodb.Table = new dynamodb.Table(this, "myApiTable", {
+      tableName: props?.prod ? props?.prod + "_myApi" : "myApi",
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      partitionKey: {
+        name: "id",
+        type: dynamodb.AttributeType.STRING,
+      },
+    });
+    this.table = myApi_table;
   }
 }

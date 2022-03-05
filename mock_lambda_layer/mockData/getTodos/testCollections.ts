@@ -8,15 +8,15 @@ export const testCollections: TestCollection = {
         response: [
           {
             id: "01",
-            title: "Carol-Jean",
+            title: "Carly",
           },
           {
             id: "01",
-            title: "Jennine",
+            title: "Darice",
           },
           {
             id: "01",
-            title: "Michal",
+            title: "Anne-Marie",
           },
         ],
       },
